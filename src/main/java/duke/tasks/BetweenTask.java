@@ -23,7 +23,7 @@ public class BetweenTask extends Task {
         this.end_date = end_date;
     }
 
-    
+
     /**
      * Returns a String representation of the duke.tasks.BetweenTask object, displaying its type (duke.tasks.BetweenTask),
      * description and the period associated with it.
