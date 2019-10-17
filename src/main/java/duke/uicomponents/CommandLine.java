@@ -1,14 +1,19 @@
-package duke.UIComponents;
+package duke.uicomponents;
 
 import javafx.scene.control.TextField;
 
 public class CommandLine extends TextField {
 
-    public CommandLine(){
+    public CommandLine() {
         super();
     }
 
-    public CommandLine(String text, String prompt){
+    /**
+     * Customised JavaFX TextField to implement persistent hinting or prompting when textfield is empty.
+     * @param text the default text to appear on the text field
+     * @param prompt the prompt message to appear on the textfield
+     */
+    public CommandLine(String text, String prompt) {
         super(text);
         setPromptText(prompt);
         getStyleClass().add("style/persistent-prompt.css");
@@ -16,7 +21,7 @@ public class CommandLine extends TextField {
         textProperty().addListener(observable -> refreshPromptVisibility());
     }
 
-    private void refreshPromptVisibility(){
+    private void refreshPromptVisibility() {
         final String text = getText();
         if (isEmptyString(text)) {
             getStyleClass().remove("no-prompt");

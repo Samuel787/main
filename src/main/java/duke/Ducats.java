@@ -1,6 +1,6 @@
 package duke;
 
-import duke.UIComponents.CommandLine;
+import duke.uicomponents.CommandLine;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -26,7 +26,7 @@ public class Ducats extends Application {
         commandLine.setId("commandLine");
         commandLine.requestFocus();
         commandLine.setOnKeyPressed(e -> {
-            if(e.getCode().equals(KeyCode.ENTER)){
+            if (e.getCode().equals(KeyCode.ENTER)) {
                 System.out.println(commandLine.getText());
                 commandLine.clear();
                 commandLine.setPromptText("Enter command here...");
@@ -54,7 +54,7 @@ public class Ducats extends Application {
         window.show();
     }
 
-    private void closeProgram(){
+    private void closeProgram() {
         //Logic to execute before closing the program
         System.out.println("Program about to close");
         window.close();
