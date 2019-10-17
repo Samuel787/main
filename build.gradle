@@ -3,12 +3,14 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '5.1.0'
     id 'application'
     id 'checkstyle'
+    id 'org.openjfx.javafxplugin' version '0.0.7'
 
 }
 
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
+    mavenCentral()
 }
 
 test {
@@ -42,5 +44,10 @@ application {
 
 run {
     standardInput = System.in
+}
+
+javafx {
+    version = "11.0.2"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 
