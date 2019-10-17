@@ -10,6 +10,7 @@ public class Song {
 
     private ArrayList<Bar> bars;
     private ArrayList<Group> groups;
+    private ArrayList<String> songChart;
 
     /**
      * Constructor for Song object, taking in a name, key and tempo.
@@ -22,22 +23,9 @@ public class Song {
         this.name = name;
         this.key = key;
         this.tempo = tempo;
-    }
-
-    /**
-     * Creates a grouping of Bar objects to be easily copied and inserted for repetitions
-     * in music.
-     *
-     * @param name the name of the Group (e.g. Verse, Chorus, Pre-Chorus)
-     * @param startingId ID of the Bar to start copying from
-     * @param endingId ID of the Bar to end the copying
-     */
-    public void createGroup(String name, int startingId, int endingId) {
-        ArrayList<Bar> groupedBars = new ArrayList<>();
-        for (int i = startingId; i <= endingId; i++) {
-            groupedBars.add(bars.get(i - 1));
-        }
-        groups.add(new Group(name, groupedBars));
+        this.bars = new ArrayList<>();
+        this.groups = new ArrayList<>();
+        this.songChart = new ArrayList<>();
     }
 
     public String getName() {
@@ -60,12 +48,59 @@ public class Song {
         return groups;
     }
 
+    /**
+     * Creates a grouping of Bar objects to be easily copied and inserted for repetitions
+     * in music.
+     *
+     * @param name the name of the Group (e.g. Verse, Chorus, Pre-Chorus)
+     * @param startingId ID of the Bar to start copying from
+     * @param endingId ID of the Bar to end the copying
+     */
+    public void createGroup(String name, int startingId, int endingId) {
+        ArrayList<Bar> groupedBars = new ArrayList<>();
+        for (int i = startingId; i <= endingId; i++) {
+            groupedBars.add(bars.get(i - 1));
+        }
+        groups.add(new Group(name, groupedBars));
+    }
+
+    public void addBar(Bar bar) {
+        bars.add(bar);
+        updateSongChart(bar);
+    }
+
     public int getNumBars() {
         return bars.size();
     }
 
+    /**
+     * Updates the Song with the new list of Bar objects.
+     * @param newBars the list of new Bar objects for the Song
+     */
     public void updateBars(ArrayList<Bar> newBars) {
         this.bars = newBars;
+        for (Bar bar: newBars) {
+            updateSongChart(bar);
+        }
     }
 
+    /**
+     * Updates the SongChart, the string representation of the Song.
+     * @param bar the new Bar to be added to the Song
+     */
+    private void updateSongChart(Bar bar) {
+        songChart.addAll(bar.getBarChart());
+    }
+
+    /**
+     * Returns a String representation of the Song.
+     * @return a String representation of the Song to be viewed by the user
+     */
+    public String showSongChart() {
+        StringBuilder formattedChart = new StringBuilder();
+        for (String chordString: songChart) {
+            formattedChart.append(chordString).append(" ");
+        }
+        return formattedChart.toString();
+    }
 }
