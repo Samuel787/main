@@ -1,1 +1,1 @@
-test aminor 120 
+test c 120 
