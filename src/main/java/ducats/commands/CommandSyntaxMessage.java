@@ -42,7 +42,7 @@ public abstract class CommandSyntaxMessage {
             + "Format: overlay_bar_song n/SONG1 n/BAR1 n/SONG2 n/BAR2 repeat\n";
     private static final String list_groupSyntax = "list_group\n"
             + "Format: list_group s/STARTING_SUBSTRING\n";
-    private static final String asciiSyntax = "ascii song s/SONG_NAME\n";
+    private static final String asciiSyntax = "ascii song s/SONG_NAME\n" + "Format: ascii legend \n";
     private static final String undoSyntax = "undo\n";
     private static final String redoSyntax = "redo\n";
     private static final String metronomeSyntax = "metronome n/DURATION_IN_NO_OF_BARS n/TEMP0 s/TIME_SIG\n";

@@ -34,7 +34,7 @@ public class AsciiCommand extends Command<SongList> {
     private static final String REST_3 = "^.";
     private static final String REST_2 = "^";
     private static final String REST_1 = "&";
-    private static final String CONT = "-";
+
 
     private static final int MAX_ROWS = 15;
     private static final int NUM_CHORDS_IN_BAR = 8;
@@ -111,6 +111,8 @@ public class AsciiCommand extends Command<SongList> {
         String result;
         if (message.length() < 6 || !message.substring(0, 6).equals("ascii ")) {
             throw new DucatsException(message);
+        } else if (message.substring(6).trim().equals("legend")) {
+            return ui.formatAsciiLegend();
         }
         try {
             message = message.substring(6).trim();
