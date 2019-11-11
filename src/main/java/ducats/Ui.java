@@ -230,12 +230,12 @@ public class Ui {
         asciiLegend.append("      Rest      |   Relative  | Syntax in |Symbol used\n");
         asciiLegend.append("      Note      |   Duration  |   Ducats  | in Ducats \n");
         asciiLegend.append("----------------|-------------|-----------|-----------\n");
-        asciiLegend.append("Whole Note      |      1      |    1_MC   |      #    \n");
-        asciiLegend.append("Dotted Half Note|     3/4     |   2*_MC   |     %.    \n");
-        asciiLegend.append("Half Note       |     1/2     |    2_MC   |      %    \n");
-        asciiLegend.append("Dotted Quarter  |     3/8     |   4*_MC   |     ^.    \n");
-        asciiLegend.append("Quarter Note    |     1/4     |    4_MC   |      ^    \n");
-        asciiLegend.append("Eighth Note     |     1/8     |    8_MC   |     &     \n");
+        asciiLegend.append("Whole Note      |      1      |    1_RT   |      #    \n");
+        asciiLegend.append("Dotted Half Note|     3/4     |   2*_RT   |     %.    \n");
+        asciiLegend.append("Half Note       |     1/2     |    2_RT   |      %    \n");
+        asciiLegend.append("Dotted Quarter  |     3/8     |   4*_RT   |     ^.    \n");
+        asciiLegend.append("Quarter Note    |     1/4     |    4_RT   |      ^    \n");
+        asciiLegend.append("Eighth Note     |     1/8     |    8_RT   |     &     \n");
 
         return asciiLegend.toString();
     }
