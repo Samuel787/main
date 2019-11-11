@@ -141,11 +141,13 @@ public class AsciiCommand extends Command<SongList> {
 
     private Song getBarAsSong(SongList songList, int barNum, String message) throws DucatsException {
         //bar index for user is assumed to start from 1
-        if (barNum > songList.getSongIndex(songList.getActiveIndex()).getNumBars() || barNum < 1) {
+        int activeSongIndex = songList.getActiveIndex();
+        Song activeSong = songList.getSongIndex(activeSongIndex);
+        if (barNum > activeSong.getNumBars() || barNum < 1) {
             throw new DucatsException(message, "no_index");
         }
         Song tempSong = new Song("Test song", "C-Major", 120);
-        Bar displayBar = songList.getSongIndex(songList.getActiveIndex()).getBars().get(barNum - 1);
+        Bar displayBar = activeSong.getBars().get(barNum - 1);
         tempSong.addBar(displayBar);
         return tempSong;
     }

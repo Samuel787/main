@@ -71,7 +71,7 @@ public class GroupCommand extends Command<SongList> {
             int activeSongIndex = songList.getActiveIndex();
             Song song = songList.getSongIndex(activeSongIndex);
             Group group = verifyAndCreateGroup(song, name, startNo, endNo);
-            songList.getSongIndex(songList.getActiveIndex()).getGroups().add(group);
+            song.getGroups().add(group);
         }
     }
 
