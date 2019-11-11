@@ -52,6 +52,9 @@ public class AsciiCommand extends Command<SongList> {
     //symbol to indicate continuation of rest in the songsheet
     private static final String CONTINUE_REST_SONGSHEET = "X";
 
+    //number of string after which to wrap the display of ascii song to new line
+    private static final int WRAP_AFTER_NUM_STRINGS = 72;
+
     private String message;
 
 
@@ -211,8 +214,6 @@ public class AsciiCommand extends Command<SongList> {
         return printSongAscii(tempSong);
     }
 
-
-    private static final int WRAP_AFTER_NUM_STRINGS = 72;
     private static String wrapContent(String str) {
         String[] strings = str.split("\n");
         ArrayList<ArrayList<String>> rows = new ArrayList<>();
@@ -326,7 +327,7 @@ public class AsciiCommand extends Command<SongList> {
         return songAscii;
     }
 
-    private static void initialiseFirstLayerParse(ArrayList<ArrayList<String>> songAscii, Song song){
+    private static void initialiseFirstLayerParse(ArrayList<ArrayList<String>> songAscii, Song song) {
         for (int i = 0; i < 15; i++) {
             songAscii.add(i, new ArrayList<>());
         }

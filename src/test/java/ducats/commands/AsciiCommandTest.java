@@ -3,27 +3,38 @@ package ducats.commands;
 import ducats.Ducats;
 import ducats.DucatsException;
 import ducats.Ui;
-import ducats.components.*;
+import ducats.components.Group;
+import ducats.components.Song;
+import ducats.components.Bar;
+
+import ducats.components.SongList;
+import ducats.components.SongConverter;
+
+
 import org.junit.jupiter.api.Test;
 
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class AsciiCommandTest {
 
     //@@author Samuel787
     @Test
-    public void testPrintBarAscii_validBar_success(){
+    public void testPrintBarAscii_validBar_success() {
         String result = "";
-        try{
+        try {
             result = AsciiCommand.printBarAscii(new Bar(1, "4*_UC 4*_UC 4_UC"));
-        } catch (DucatsException e){
+        } catch (DucatsException e) {
             System.out.println(e);
             fail();
         }
-        String expected_result = "UC: @. @. @ \n"
+        String expectedResult = "UC: @. @. @ \n"
                             + "UB: --------\n"
                             + "UA:         \n"
                             + "UG: --------\n"
@@ -39,7 +50,7 @@ public class AsciiCommandTest {
                             + "LD:         \n"
                             + "LC:         \n"
                             + "\n";
-        assertEquals(expected_result, result);
+        assertEquals(expectedResult, result);
 
         //test case 2
         try {
@@ -196,38 +207,38 @@ public class AsciiCommandTest {
             song.addBar(new Bar(0, "4_LG 4_LA 4_MC 4_UD"));
             song.addBar(new Bar(0, "4_LB 4_RT 4_LB 4_RT"));
             song.addBar(new Bar(0, "4_LF 4_LD 4_UA 4_UA"));
-            String result ="UC:          @. @. @                    @              @                    \n" +
-                    "UB:          --------       -! -        --            ---                   \n" +
-                    "UA:                                       @          @                      \n" +
-                    "UG: --------|--------|--------|--------|----@---|--@-----|--------|--------|\n" +
-                    "UF:         |        |        |        |      @ |@       |        |        |\n" +
-                    "UE: --------|--------|--------|--------|--------|--------|--------|--------|\n" +
-                    "UD:         |        |        |        |        |        |        |      @ |\n" +
-                    "MC: @-^-@-^-|--------|%---^.--|@-^-@-^-|--------|--------|--------|----@---|\n" +
-                    "LB:         |        |        |        |        |        |        |        |\n" +
-                    "LA: --------|--------|--------|--------|--------|--------|--------|--@-----|\n" +
-                    "LG:         |        |        |        |        |        |        |@       |\n" +
-                    "LF: --------|--------|--------|--------|--------|--------|------@-|--------|\n" +
-                    "LE:                                                           @             \n" +
-                    "LD:                                                        -@---            \n" +
-                    "LC:                                                       @                 \n" +
-                    "\n" +
-                    "UC:                  \n" +
-                    "UB:                  \n" +
-                    "UA:              @ @ \n" +
-                    "UG: --------|--------\n" +
-                    "UF:         |        \n" +
-                    "UE: --------|--------\n" +
-                    "UD:         |        \n" +
-                    "MC: --^---^-|--------\n" +
-                    "LB: @   @   |        \n" +
-                    "LA: --------|--------\n" +
-                    "LG:         |        \n" +
-                    "LF: --------|@-------\n" +
-                    "LE:                  \n" +
-                    "LD:           -@-    \n" +
-                    "LC:                  \n" +
-                    "\n";
+            String result = "UC:          @. @. @                    @              @                    \n"
+                    + "UB:          --------       -! -        --            ---                   \n"
+                    + "UA:                                       @          @                      \n"
+                    + "UG: --------|--------|--------|--------|----@---|--@-----|--------|--------|\n"
+                    + "UF:         |        |        |        |      @ |@       |        |        |\n"
+                    + "UE: --------|--------|--------|--------|--------|--------|--------|--------|\n"
+                    + "UD:         |        |        |        |        |        |        |      @ |\n"
+                    + "MC: @-^-@-^-|--------|%---^.--|@-^-@-^-|--------|--------|--------|----@---|\n"
+                    + "LB:         |        |        |        |        |        |        |        |\n"
+                    + "LA: --------|--------|--------|--------|--------|--------|--------|--@-----|\n"
+                    + "LG:         |        |        |        |        |        |        |@       |\n"
+                    + "LF: --------|--------|--------|--------|--------|--------|------@-|--------|\n"
+                    + "LE:                                                           @             \n"
+                    + "LD:                                                        -@---            \n"
+                    + "LC:                                                       @                 \n"
+                    + "\n"
+                    + "UC:                  \n"
+                    + "UB:                  \n"
+                    + "UA:              @ @ \n"
+                    + "UG: --------|--------\n"
+                    + "UF:         |        \n"
+                    + "UE: --------|--------\n"
+                    + "UD:         |        \n"
+                    + "MC: --^---^-|--------\n"
+                    + "LB: @   @   |        \n"
+                    + "LA: --------|--------\n"
+                    + "LG:         |        \n"
+                    + "LF: --------|@-------\n"
+                    + "LE:                  \n"
+                    + "LD:           -@-    \n"
+                    + "LC:                  \n"
+                    + "\n";
             assertEquals(result, AsciiCommand.printSongAscii(song));
         } catch (DucatsException e) {
             fail();
@@ -235,10 +246,11 @@ public class AsciiCommandTest {
     }
 
     @Test
-    public void testExecute_validBarOfSong_success(){
+    public void testExecute_validBarOfSong_success() {
         String fileDelimiter = System.getProperty("file.separator");
         SongConverter songconverter = new SongConverter();
-        ducats.Storage storage = new ducats.Storage(System.getProperty("user.dir") + fileDelimiter + "songlist.txt");
+        ducats.Storage storage = new ducats.Storage(System.getProperty("user.dir") + fileDelimiter
+                + "songlist.txt");
 
         SongList songs = new SongList();
         String testSong =
@@ -293,10 +305,11 @@ public class AsciiCommandTest {
     }
 
     @Test
-    public void testExecute_invalidBarOfSong_noIndexException(){
+    public void testExecute_invalidBarOfSong_noIndexException() {
         String fileDelimiter = System.getProperty("file.separator");
         SongConverter songconverter = new SongConverter();
-        ducats.Storage storage = new ducats.Storage(System.getProperty("user.dir") + fileDelimiter + "songlist.txt");
+        ducats.Storage storage = new ducats.Storage(System.getProperty("user.dir") + fileDelimiter
+                + "songlist.txt");
 
         SongList songs = new SongList();
         String testSong =
@@ -352,10 +365,11 @@ public class AsciiCommandTest {
     }
 
     @Test
-    public void testExecute_validGroupOfSong_success(){
+    public void testExecute_validGroupOfSong_success() {
         String fileDelimiter = System.getProperty("file.separator");
         SongConverter songconverter = new SongConverter();
-        ducats.Storage storage = new ducats.Storage(System.getProperty("user.dir") + fileDelimiter + "songlist.txt");
+        ducats.Storage storage = new ducats.Storage(System.getProperty("user.dir") + fileDelimiter
+                + "songlist.txt");
 
         SongList songs = new SongList();
         String testSong =
@@ -418,10 +432,11 @@ public class AsciiCommandTest {
 
 
     @Test
-    public void testExecute_invalidGroupOfSong_groupNotFoundException(){
+    public void testExecute_invalidGroupOfSong_groupNotFoundException() {
         String fileDelimiter = System.getProperty("file.separator");
         SongConverter songconverter = new SongConverter();
-        ducats.Storage storage = new ducats.Storage(System.getProperty("user.dir") + fileDelimiter + "songlist.txt");
+        ducats.Storage storage = new ducats.Storage(System.getProperty("user.dir") + fileDelimiter
+                + "songlist.txt");
 
         SongList songs = new SongList();
         String testSong =
@@ -485,10 +500,11 @@ public class AsciiCommandTest {
 
 
     @Test
-    public void testExecute_validSong_success(){
+    public void testExecute_validSong_success() {
         String fileDelimiter = System.getProperty("file.separator");
         SongConverter songconverter = new SongConverter();
-        ducats.Storage storage = new ducats.Storage(System.getProperty("user.dir") + fileDelimiter + "songlist.txt");
+        ducats.Storage storage = new ducats.Storage(System.getProperty("user.dir")
+                + fileDelimiter + "songlist.txt");
 
         SongList songs = new SongList();
         String testSong =
@@ -543,10 +559,11 @@ public class AsciiCommandTest {
     }
 
     @Test
-    public void testExecute_invalidSong_noSongException(){
+    public void testExecute_invalidSong_noSongException() {
         String fileDelimiter = System.getProperty("file.separator");
         SongConverter songconverter = new SongConverter();
-        ducats.Storage storage = new ducats.Storage(System.getProperty("user.dir") + fileDelimiter + "songlist.txt");
+        ducats.Storage storage = new ducats.Storage(System.getProperty("user.dir")
+                + fileDelimiter + "songlist.txt");
 
         SongList songs = new SongList();
         String testSong =

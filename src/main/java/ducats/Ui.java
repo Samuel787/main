@@ -196,25 +196,16 @@ public class Ui {
     public String formatListGroups(ArrayList<Group> groups) {
         String result = "Here are the groups available: \n";
         int groupCount = 1;
-        if(groups.size() == 0){
+        if (groups.size() == 0) {
             //no groups found
             result = "No groups are found for that search";
         } else {
-            for(Group group : groups){
+            for (Group group : groups) {
                 result += groupCount + ". " + group.getName() + "\n";
                 groupCount++;
             }
         }
         return result;
-//        int songIndex = songList.getActiveIndex();
-//        ArrayList<Group> groups = songList.getSongIndex(songIndex).getGroups();
-//        String result = "Here are the groups available: \n";
-//        int groupCount = 1;
-//        for (Group group : groups) {
-//            result += groupCount + ". " + group.getName() + "\n";
-//            groupCount++;
-//        }
-//        return result;
     }
 
     //@@author
